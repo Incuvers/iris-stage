@@ -50,6 +50,7 @@ setup(
     scripts=[
         'bin/stage'
     ],
+    packages=find_packages(),
     include_package_data=True,
     setup_requires=['wheel'],
     install_requires=REQUIRED,
