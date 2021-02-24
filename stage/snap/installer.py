@@ -8,25 +8,26 @@ Modified: 2021-02
 Handles new snap installations from s3 download location
 """
 import os
-import logging
+import shutil
+import logging.config
 
 class Installer:
 
-    # bind logging to config file
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="%(asctime)s %(levelname)s %(threadName)s %(name)s %(message)s"
-    )
-
     def __init__(self) -> None:
+        self.logger = logging.getLogger(__name__)
         self.tmp = os.environ['SNAP_FP']
         self.name = os.environ['SNAP_NAME']
-        logging.info("%s instantiated successfully.", __name__)
+        self.secrets = os.environ['SNAP_SECRETS']
+        self.common = os.environ['SNAP_COMMON']
+        self.logger.info("%s instantiated successfully.", __name__)
 
     def install(self):
         """
+        Uninstall existing snap, artificially inject machine secrets from
+        secrets to $SNAP_COMMON and install new snap file in devmode.
         """
         os.system(f"snap remove {self.name}")
-        logging.info("Installing newest snap")
+        self.logger.info("Installing newest snap")
+        shutil.copytree(self.secrets, self.common)
         os.system(f"snap install {self.tmp} --devmode")
-        logging.info("Installing newest snap")
+        self.logger.info("Installing newest snap")
