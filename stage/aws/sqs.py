@@ -9,7 +9,8 @@ This module listens for new snap publishes on S3 and downloads and installs
 these new updates
 
 This module listens for an SQS message on a multi-part upload event completion.
-This triggers the server to pull the .snap file from s3, remove the current snap and install the new snap file
+This triggers the server to pull the .snap file from s3, remove the current 
+snap and install the new snap file
 """
 
 

@@ -35,7 +35,8 @@ def config():
         with open(CONFIG_PATH) as conf:
             logging.config.dictConfig(yaml.load(conf, Loader=yaml.FullLoader))
     except FileNotFoundError:
-        print("Logging config file not found in expected absolute path: {}".format(CONFIG_PATH))
+        print("Logging config file not found in expected absolute path: {}"
+            .format(CONFIG_PATH))
     except Exception as exc:
         print("Logging configuration failed: {}".format(exc))
     else:

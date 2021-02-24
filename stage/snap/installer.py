@@ -25,7 +25,6 @@ class Installer:
 
     def install(self):
         """
-        
         """
         os.system(f"snap remove {self.name}")
         logging.info("Installing newest snap")
