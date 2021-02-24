@@ -51,7 +51,7 @@ class SQSClient:
                     'All'
                 ],
                 VisibilityTimeout=0,
-                WaitTimeSeconds=10
+                WaitTimeSeconds=120
             )
             self.logger.info("Received Response: %s", response)
             try:
