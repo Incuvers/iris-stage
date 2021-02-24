@@ -5,4 +5,4 @@ export S3_OBJECT='iris-incuvers.snap'
 export SNAP_FP='/tmp/iris-incuvers.snap'
 export SNAP_NAME='iris-incuvers'
 
-python3 -m staging
+python3 -m stage
