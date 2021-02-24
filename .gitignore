@@ -1,3 +1,5 @@
 .aws/config
 .aws/credentials
-*.pyc
+__pycache__
+.secrets/*
+!.secrets/README.md
