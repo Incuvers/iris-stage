@@ -3,4 +3,4 @@
 
 from stage.aws.sqs import SQSClient
 
-SQSClient()
+SQSClient().poll_sqs()
