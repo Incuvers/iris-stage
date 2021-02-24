@@ -25,8 +25,8 @@ class Installer:
 
     def install(self):
         """
+        
         """
-        logging.info("")
         os.system(f"snap remove {self.name}")
         logging.info("Installing newest snap")
         os.system(f"snap install {self.tmp} --devmode")

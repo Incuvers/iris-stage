@@ -12,56 +12,62 @@ This module listens for an SQS message on a multi-part upload event completion.
 This triggers the server to pull the .snap file from s3, remove the current snap and install the new snap file
 """
 
+
 import boto3
-import logging
+import logging.config
+
+from stage.aws.s3 import S3Client
+from stage.snap.installer import Installer
 
 class SQSClient:
 
-    # bind logging to config file
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="%(asctime)s %(levelname)s %(threadName)s %(name)s %(message)s"
-    )
-
     def __init__(self) -> None:
+        self.logger = logging.getLogger(__name__)
         # Create SQS client
-        sqs = boto3.client('sqs')
-        logging.info("%s instantiated successfully.", __name__)
+        self.sqs = boto3.client('sqs')
+        self.s3_client = S3Client()
+        self.installer = Installer()
+        self.logger.info("%s instantiated successfully.", __name__)
 
-    # List SQS queues
-    response = sqs.list_queues()
-    logging.info("SQS Queue list: %s", response['QueueUrls'])
-    sqs_queue_url=response['QueueUrls'][-1]
+    def poll_sqs(self) -> None:
+        """
+        Polls SQS server for snap push completion messages.
+        """
+        # List SQS queues
+        response = self.sqs.list_queues()
+        self.logger.info("SQS Queue list: %s", response['QueueUrls'])
+        sqs_queue_url=response['QueueUrls'][-1]
 
-    while True:
-        # Receive message from SQS queue
-        response = sqs.receive_message(
-            QueueUrl=sqs_queue_url,
-            AttributeNames=[
-                'SentTimestamp'
-            ],
-            MaxNumberOfMessages=1,
-            MessageAttributeNames=[
-                'All'
-            ],
-            VisibilityTimeout=0,
-            WaitTimeSeconds=5
-        )
-        logging.info("Received Response: %s", response)
-        try:
-            message = response['Messages'][0]
-        except KeyError:
-            logging.info("No message received")
-        else:
-            # digest recieved message and launch a service
-            receipt_handle = message['ReceiptHandle']
-            # Delete received message from queue
-            sqs.delete_message(
+        while True:
+            # Receive message from SQS queue
+            response = self.sqs.receive_message(
                 QueueUrl=sqs_queue_url,
-                ReceiptHandle=receipt_handle
+                AttributeNames=[
+                    'SentTimestamp'
+                ],
+                MaxNumberOfMessages=1,
+                MessageAttributeNames=[
+                    'All'
+                ],
+                VisibilityTimeout=0,
+                WaitTimeSeconds=10
             )
-            logging.info("Received and deleted message: %s", message)
-
-
-
-`
+            self.logger.info("Received Response: %s", response)
+            try:
+                message = response['Messages'][0]
+            except KeyError:
+                pass
+            else:
+                self.logger.info("Receiving and digesting message")
+                # digest recieved message and launch a service
+                receipt_handle = message['ReceiptHandle']
+                # Delete received message from queue
+                self.sqs.delete_message(
+                    QueueUrl=sqs_queue_url,
+                    ReceiptHandle=receipt_handle
+                )
+                self.logger.info("Pulling recent snap from s3 bucket.")
+                self.s3_client.pull()
+                self.logger.info("Installing pulled snap.")
+                self.installer.install()
+                self.logger.info("Snap install complete.")
