@@ -28,7 +28,4 @@ jobs:
           sudo apt install -y make shellcheck
           sudo -H python3 -m pip install yamllint flake8
       - name: Run lint directive
-        run: |
-          flake8 monitor && flake8 app && flake8 daemon
-          yamllint .
-          shellcheck bin/*
+        run: flake8 stage && yamllint . && shellcheck bin/*
