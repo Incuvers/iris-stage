@@ -41,19 +41,26 @@ class SQSClient:
 
         while True:
             # Receive message from SQS queue
-            response = self.sqs.receive_message(
-                QueueUrl=sqs_queue_url,
-                AttributeNames=[
-                    'SentTimestamp'
-                ],
-                MaxNumberOfMessages=1,
-                MessageAttributeNames=[
-                    'All'
-                ],
-                VisibilityTimeout=0,
-                WaitTimeSeconds=20
-            )
+            try:
+                response = self.sqs.receive_message(
+                    QueueUrl=sqs_queue_url,
+                    AttributeNames=[
+                        'SentTimestamp'
+                    ],
+                    MaxNumberOfMessages=1,
+                    MessageAttributeNames=[
+                        'All'
+                    ],
+                    VisibilityTimeout=0,
+                    WaitTimeSeconds=20
+                )
+            except BaseException as exc:
+                self.logger.exception(
+                    "An exception occured when making sqs request: %s", exc)
+                continue
+            
             self.logger.info("Received Response: %s", response)
+            
             try:
                 message = response['Messages'][0]
             except KeyError:
