@@ -34,4 +34,4 @@ class Installer:
         except FileExistsError:
             self.logger.info(
                 "Machine secrets already exist in the correct location.")
-        os.system(f"snap install {self.tmp} --devmode")
+        # os.system(f"snap install {self.tmp} --devmode")
