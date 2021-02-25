@@ -26,8 +26,8 @@ class Installer:
         Uninstall existing snap, artificially inject machine secrets from
         secrets to $SNAP_COMMON and install new snap file in devmode.
         """
+        self.logger.info("Removing current snap")
         os.system(f"snap remove {self.name}")
         self.logger.info("Installing newest snap")
         shutil.copytree(self.secrets, self.common)
         os.system(f"snap install {self.tmp} --devmode")
-        self.logger.info("Installing newest snap")
