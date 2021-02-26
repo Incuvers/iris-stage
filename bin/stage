@@ -5,10 +5,10 @@ export S3_BUCKET='snapbuilds'
 export S3_OBJECT="$SNAP_NAME.snap"
 export SNAP_FP="/tmp/$S3_OBJECT"
 
-export SNAP_SECRETS="$HOME/.secrets"
+export SNAP_SECRETS="/home/ubuntu/.secrets"
 export SNAP_COMMON="/var/snap/$SNAP_NAME/common/certs"
 
-export AWS_CONFIG_FILE="$HOME/.aws/config"
-export AWS_SHARED_CREDENTIALS_FILE="$HOME/.aws/credentials"
+export AWS_CONFIG_FILE="/home/ubuntu/.aws/config"
+export AWS_SHARED_CREDENTIALS_FILE="/home/ubuntu/.aws/credentials"
 
 python3 -m stage
