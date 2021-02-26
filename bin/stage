@@ -8,6 +8,7 @@ export SNAP_FP="/tmp/$S3_OBJECT"
 export SNAP_SECRETS="$HOME/.secrets"
 export SNAP_COMMON="/var/snap/$SNAP_NAME/common/certs"
 
-export AWS_REGION="ca-central-1"
+export AWS_CONFIG_FILE="$HOME/.aws/config"
+export AWS_SHARED_CREDENTIALS_FILE="$HOME/.aws/credentials"
 
 python3 -m stage
