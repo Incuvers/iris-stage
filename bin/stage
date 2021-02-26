@@ -1,10 +1,11 @@
 #!/bin/bash
 
+export SNAP_NAME="iris-incuvers"
 export S3_BUCKET='snapbuilds'
-export S3_OBJECT='iris-incuvers.snap'
-export SNAP_FP='/tmp/iris-incuvers.snap'
-export SNAP_NAME='iris-incuvers'
+export S3_OBJECT="$SNAP_NAME.snap"
+export SNAP_FP="/tmp/$S3_OBJECT"
+
 export SNAP_SECRETS="$HOME/.secrets"
-export SNAP_COMMON='/var/snap/iris-incuvers/common/certs'
+export SNAP_COMMON="/var/snap/$SNAP_NAME/common/certs"
 
 python3 -m stage
