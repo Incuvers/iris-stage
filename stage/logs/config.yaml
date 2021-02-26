@@ -14,7 +14,7 @@ loggers:
 handlers:
   default_handler:
     class: 'logging.FileHandler'
-    filename: stage/logs/stage.log
+    filename: /var/log/stage.log
     level: 'DEBUG'
     formatter: default
   console_handler:
