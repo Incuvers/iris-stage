@@ -46,6 +46,7 @@ setup(
     author=AUTHOR,
     author_email=EMAIL,
     url='https://github.com/Incuvers/iris-staging',
+    download_url='https://github.com/Incuvers/iris-stage/archive/0.0.1.tar.gz',
     python_requires=REQUIRES_PYTHON,
     scripts=[
         'bin/stage'
