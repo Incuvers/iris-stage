@@ -3,3 +3,7 @@
 __pycache__
 .secrets/*
 !.secrets/README.md
+
+# python packaging artefacts
+*.egg-info
+dist/
