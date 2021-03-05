@@ -17,10 +17,5 @@ if cmd == 'start':
 elif cmd == 'stop':
     print("Stopping service.")
     service.stop()
-elif cmd == 'status':
-    if service.is_running():
-        print("Service is running.")
-    else:
-        print("Service is not running.")
 else:
     sys.exit('Unknown command "%s".' % cmd)
