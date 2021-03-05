@@ -13,7 +13,7 @@ loggers:
 
 handlers:
   sys_handler:
-    class: logging.SysLogHandler
+    class: logging.handlers.SysLogHandler
     level: DEBUG
     address: /dev/log
     facility: 3
