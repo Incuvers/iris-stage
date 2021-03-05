@@ -3,7 +3,25 @@
 
 ![img](/docs/img/Incuvers-black.png)
 
-Modified: 2021-02
+Modified: 2021-03
+
+## Quickstart
+Upgrade pip:
+```bash
+python3 -m pip install --upgrade pip
+```
+Install the iris_stage package:
+```bash
+python3 -m pip install iris_stage
+```
+Launch the staging server:
+```bash
+stage
+```
+Halt the server:
+```bash
+unstage
+```
 
 ## Server Requirements
 This server is designed to be run on an iris production machine. All the hardware and peripherals should be mounted and ready for integration testing.
