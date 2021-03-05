@@ -7,12 +7,12 @@ import os
 from setuptools import find_packages, setup
 
 # meta-data.
-NAME = 'iris-staging-server'
+NAME = 'iris_stage'
 DESCRIPTION = 'Staging service for iris snap deployment pipeline'
 EMAIL = 'info@incuvers.com'
 AUTHOR = 'Incuvers'
 REQUIRES_PYTHON = '>=3.8.0'
-VERSION = '0.0.1'
+VERSION = False
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -49,7 +49,8 @@ setup(
     download_url='https://github.com/Incuvers/iris-stage/archive/0.0.1.tar.gz',
     python_requires=REQUIRES_PYTHON,
     scripts=[
-        'bin/stage'
+        'bin/stage',
+        'bin/unstage'
     ],
     packages=find_packages(),
     include_package_data=True,
