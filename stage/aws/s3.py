@@ -14,14 +14,13 @@ import logging
 
 class S3Client:
 
-    bucket = os.environ['S3_BUCKET']
-    obj = os.environ['S3_OBJECT']
-    tmp = os.environ['SNAP_FP']
-
     def __init__(self) -> None:
         # here we need to get the bucket credentials from .aws/config so the 
         # aws credentials can be easily referenced and persist through service
         # restarts
+        self.bucket = os.environ['S3_BUCKET']
+        self.obj = os.environ['S3_OBJECT']
+        self.tmp = os.environ['SNAP_FP']
         self.logger = logging.getLogger(__name__)
         self.s3 = boto3.client("s3")
         self.logger.info("%s instantiated successfully.", __name__)
