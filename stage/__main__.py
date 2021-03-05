@@ -12,8 +12,10 @@ cmd = sys.argv[1].lower()
 service = StageServer(name='iris_staging_server', pid_dir='/tmp')
 
 if cmd == 'start':
+    print("Starting service.")
     service.start()
 elif cmd == 'stop':
+    print("Stopping service.")
     service.stop()
 elif cmd == 'status':
     if service.is_running():
