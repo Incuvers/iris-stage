@@ -4,7 +4,7 @@ import os
 import sys
 import logging.config
 
-from stage.service.service import StageServer
+from iris_stage.service.service import StageServer
 
 logger = logging.getLogger(__name__)
 SERVICE_NAME = os.environ['SERVICE_NAME']

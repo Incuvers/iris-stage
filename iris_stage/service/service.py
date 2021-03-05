@@ -12,9 +12,9 @@ import logging.config
 import time
 
 from service import Service
-from stage.aws.s3 import S3Client
-from stage.aws.sqs import SQSClient
-from stage.snap.installer import Installer
+from iris_stage.aws.s3 import S3Client
+from iris_stage.aws.sqs import SQSClient
+from iris_stage.snap.installer import Installer
 
 
 class StageServer(Service):

@@ -7,6 +7,6 @@ Modified: 2021-02
 
 
 """
-from stage.logs.config import config
+from iris_stage.logs.config import config
 
 config()

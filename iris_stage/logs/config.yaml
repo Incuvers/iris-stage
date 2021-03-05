@@ -6,15 +6,15 @@ loggers:
   '':
     level: INFO
     handlers: [ console_handler ]
-  stage.aws:
+  iris-stage.aws:
     level: INFO
     handlers: [ sys_handler ]
     propagate: no
-  stage.service:
+  iris-stage.service:
     level: INFO
     handlers: [ sys_handler ]
     propagate: no
-  stage.snap:
+  iris-stage.snap:
     level: INFO
     handlers: [ sys_handler ]
     propagate: no
