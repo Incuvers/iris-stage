@@ -5,8 +5,16 @@ loggers:
   # default logger for unregistered modules
   '':
     level: INFO
-    handlers: [ sys_handler ]
+    handlers: [ console_handler ]
   stage.aws:
+    level: INFO
+    handlers: [ sys_handler ]
+    propagate: no
+  stage.service:
+    level: INFO
+    handlers: [ sys_handler ]
+    propagate: no
+  stage.snap:
     level: INFO
     handlers: [ sys_handler ]
     propagate: no
