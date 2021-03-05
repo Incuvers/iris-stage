@@ -4,22 +4,28 @@ disable_existing_loggers: true
 loggers:
   # default logger for unregistered modules
   '':
-    level: 'INFO'
-    handlers: ['default_handler']
+    level: INFO
+    handlers: [ sys_handler ]
   stage.aws:
-    level: 'INFO'
-    handlers: ['console_handler']
+    level: INFO
+    handlers: [ sys_handler ]
     propagate: no
 
 handlers:
   default_handler:
-    class: 'logging.FileHandler'
+    class: logging.FileHandler
     filename: /var/log/stage.log
-    level: 'DEBUG'
+    level: DEBUG
+    formatter: default
+  sys_handler:
+    class: logging.SysLogHandler
+    level: DEBUG
+    address: /dev/log
+    facility: 3
     formatter: default
   console_handler:
-    class: 'logging.StreamHandler'
-    level: 'INFO'
+    class: logging.StreamHandler
+    level: INFO
     formatter: default
 
 formatters:
