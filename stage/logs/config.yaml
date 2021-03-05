@@ -25,12 +25,14 @@ handlers:
     level: DEBUG
     address: /dev/log
     facility: 3
-    formatter: default
+    formatter: syslog
   console_handler:
     class: logging.StreamHandler
     level: INFO
-    formatter: default
+    formatter: console
 
 formatters:
-  default:
+  console:
+    format: '%(asctime)s - %(levelname)s : %(message)s'
+  syslog:
     format: '%(asctime)s - %(threadName)s - %(name)s - %(lineno)d - %(levelname)s : %(message)s'
