@@ -15,4 +15,4 @@ export SNAP_COMMON="/var/snap/$SNAP_NAME/common/certs"
 export AWS_CONFIG_FILE="/home/ubuntu/.aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="/home/ubuntu/.aws/credentials"
 
-python3 -m stage start
+python3 -m iris-stage start
