@@ -12,11 +12,6 @@ loggers:
     propagate: no
 
 handlers:
-  default_handler:
-    class: logging.FileHandler
-    filename: /var/log/stage.log
-    level: DEBUG
-    formatter: default
   sys_handler:
     class: logging.SysLogHandler
     level: DEBUG
