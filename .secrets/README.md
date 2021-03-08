@@ -1,7 +1,7 @@
 # Serial Certifications
 This directory is the local storage for credentials identifying this device when connecting to Incuvers webservices. The identity issuer generates this folder and places it here in `monitor/daemon/ident/`. This directory name and contents must not be modified by users.
 
-These certs will be stored in `/home/ubuntu/.secrets/` and artifically inserted into `$SNAP_COMMON` before each snap is installed. Note that this server runs as a daemon process which is run as root. Root resolves `$HOME` to `/root` and the ubuntu user resolved `$HOME` to `/home/ubuntu`. This should be taken into consideration regarding path resolution and server configuration. 
+These certs will be stored in `/home/ubuntu/.secrets/` and artifically inserted into `$SNAP_COMMON` before each snap is installed. Note that this client runs as a daemon process which is run as root. Root resolves `$HOME` to `/root` and the ubuntu user resolved `$HOME` to `/home/ubuntu`. This should be taken into consideration regarding path resolution and client configuration. 
 
 ## Expected Contents
 | System Permissions          | File name           |

@@ -4,7 +4,7 @@ import os
 import sys
 import logging.config
 
-from iris_stage.service.service import StageServer
+from iris_stage.service.service import StageClient
 
 logger = logging.getLogger(__name__)
 SERVICE_NAME = os.environ['SERVICE_NAME']
@@ -14,8 +14,8 @@ if len(sys.argv) != 2:
     sys.exit('Syntax: %s COMMAND' % sys.argv[0])
 
 cmd = sys.argv[1].lower()
-# instantiate staging server
-service = StageServer(name=SERVICE_NAME, pid_dir=PID_DIR)
+# instantiate staging client
+service = StageClient(name=SERVICE_NAME, pid_dir=PID_DIR)
 
 if cmd == 'start':
     logger.info("Starting %s service in %s", SERVICE_NAME, PID_DIR)

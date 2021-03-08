@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-IRIS Staging Server
+IRIS Staging Client
 ===================
 Modified: 2021-02
 

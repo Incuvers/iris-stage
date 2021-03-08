@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-IRIS Staging Server Service
+IRIS Staging Client Service
 ===========================
 Modified: 2021-03
 
@@ -17,7 +17,7 @@ from iris_stage.aws.sqs import SQSClient
 from iris_stage.snap.installer import Installer
 
 
-class StageServer(Service):
+class StageClient(Service):
 
     POLL_RATE = 5
 

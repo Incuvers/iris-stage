@@ -1,16 +1,13 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 """
-AWS S3 -> SQS Staging Server
-============================
-Modified: 2021-02
-
-This module listens for new snap publishes on S3 and downloads and installs
-these new updates
+AWS SQS Staging Client
+======================
+Modified: 2021-03
 
 This module listens for an SQS message on a multi-part upload event completion.
-This triggers the server to pull the .snap file from s3, remove the current 
-snap and install the new snap file
+Once an SQS notification is received it digests the message and unblocks the
+proceeding stages in the pipeline.
 """
 
 import boto3
