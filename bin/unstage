@@ -4,4 +4,4 @@
 export SERVICE_NAME="iris_staging_server"
 export PID_DIR="/tmp"
 
-python3 -m iris-stage stop
+python3 -m iris_stage stop
