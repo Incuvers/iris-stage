@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 source .env
 
 # handle all non-zero exit status codes with a slack notification
@@ -24,6 +24,6 @@ fi
 
 SERVICE=$1
 
-printf "%b" "${OKB}Uploading package distribution${NC}"
+printf "%b" "${OKB}Uploading package distribution${NC}\n"
 twine upload -r "$SERVICE" dist/*
 printf "%b" "${OKG} ✓ ${NC}complete\n"
