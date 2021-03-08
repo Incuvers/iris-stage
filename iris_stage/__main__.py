@@ -22,6 +22,9 @@ if cmd == 'start':
     service.start()
 elif cmd == 'stop':
     logger.info("Halting %s service in %s", SERVICE_NAME, PID_DIR)
-    service.stop()
+    try:
+        service.stop()
+    except ValueError:
+        logger.info("Service %s is not running", SERVICE_NAME)
 else:
     sys.exit('Unknown command "%s".' % cmd)
