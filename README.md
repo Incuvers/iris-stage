@@ -6,11 +6,11 @@
 Modified: 2021-03
 
 ## Quickstart
-Install the iris_stage package:
+Install the latest `iris-stage` package:
 ```bash
 python3 -m pip install --upgrade pip
 ...
-python3 -m pip install iris-stage
+python3 -m pip install --no-cache iris-stage
 ```
 Launch the staging client:
 ```bash
@@ -29,3 +29,6 @@ The AWS Python SDK `boto3` requires AWS user tokens and region information. To a
 
 ### IRIS Machine Credentials
 The IRIS snap requires production grade machine credentials. I have required that the machine credentials are bound to the staging client in the `$HOME` directory as described [here](.secrets/README.md). These credentials must be production grade as the snap is built pointing to our production api.
+
+## Development
+A brief development guide is detailed [here](/docs/dev.md)
