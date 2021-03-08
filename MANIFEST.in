@@ -3,3 +3,6 @@ graft stage
 
 # exclude all compiler artefacts
 global-exclude *.py[co]
+
+# include requirements.txt
+include requirements.txt
