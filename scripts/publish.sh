@@ -25,5 +25,5 @@ fi
 SERVICE=$1
 
 printf "%b" "${OKB}Uploading package distribution${NC}\n"
-twine upload -r "$SERVICE" dist/* --verbose
+twine upload -r "$SERVICE" dist/* --verbose --skip-existing
 printf "%b" "${OKG} ✓ ${NC}complete\n"
