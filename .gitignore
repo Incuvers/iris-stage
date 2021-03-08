@@ -6,5 +6,4 @@ __pycache__
 
 # python packaging artefacts
 *.egg-info
-dist/
 build/
