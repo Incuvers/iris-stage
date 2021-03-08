@@ -5,18 +5,18 @@ loggers:
   # default logger for unregistered modules
   '':
     level: INFO
-    handlers: [ console_handler ]
+    handlers: [console_handler]
   iris-stage.aws:
     level: INFO
-    handlers: [ sys_handler ]
+    handlers: [sys_handler]
     propagate: no
   iris-stage.service:
     level: INFO
-    handlers: [ sys_handler ]
+    handlers: [sys_handler]
     propagate: no
   iris-stage.snap:
     level: INFO
-    handlers: [ sys_handler ]
+    handlers: [sys_handler]
     propagate: no
 
 handlers:
