@@ -9,6 +9,12 @@ handler () {
     printf "%b" "${FAIL} ✗ ${NC} dist build failed on line $2 with exit status $1\n"
 }
 
-printf "%b" "${OKB}Building package distribution${NC}"
+# clean old distributions
+printf "%b" "${OKB}Cleaning previous distributions${NC}\n"
+rm -f dist/*
+printf "%b" "${OKG} ✓ ${NC}complete\n"
+
+# build package
+printf "%b" "${OKB}Building package distribution${NC}\n"
 python setup.py sdist bdist_wheel
 printf "%b" "${OKG} ✓ ${NC}complete\n"
