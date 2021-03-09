@@ -6,6 +6,8 @@
 Modified: 2021-03
 
 ## Quickstart
+Save AWS certs and IRIS machine certs to your home directory. See [.aws guide](.aws/README.md) and [.secrets guide](.secrets/README.md) for instructions.
+
 Install the latest `iris-stage` package:
 ```bash
 python3 -m pip install --upgrade pip
