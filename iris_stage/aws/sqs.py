@@ -11,6 +11,7 @@ proceeding stages in the pipeline.
 """
 
 import boto3
+import botocore.exceptions
 import logging.config
 
 class SQSClient:
@@ -18,7 +19,11 @@ class SQSClient:
     def __init__(self) -> None:
         self.logger = logging.getLogger(__name__)
         # Create SQS client
-        self.sqs = boto3.client('sqs')
+        try:
+            self.sqs = boto3.client('sqs')
+        except botocore.exceptions.NoCredentialsError as exc:
+            self.logger.exception("AWS credentials not found")
+            raise FileNotFoundError from exc
         # Latch on available SQS queue
         response = self.sqs.list_queues()
         self.logger.info("SQS Queue list: %s", response['QueueUrls'])

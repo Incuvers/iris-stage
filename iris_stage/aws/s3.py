@@ -11,6 +11,7 @@ Pulls bucket objects from target s3 bucket
 import os
 import boto3
 import logging
+import botocore.exceptions
 
 class S3Client:
 
@@ -22,7 +23,11 @@ class S3Client:
         self.obj = os.environ['S3_OBJECT']
         self.tmp = os.environ['SNAP_FP']
         self.logger = logging.getLogger(__name__)
-        self.s3 = boto3.client("s3")
+        try:
+            self.s3 = boto3.client("s3")
+        except botocore.exceptions.NoCredentialsError as exc:
+            self.logger.exception("AWS credentials not found")
+            raise FileNotFoundError from exc
         self.logger.info("%s instantiated successfully.", __name__)
     
     def pull(self) -> None:
