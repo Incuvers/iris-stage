@@ -32,7 +32,8 @@ class Installer:
         try:
             shutil.copytree(self.secrets, self.common)
         except FileNotFoundError as exc:
-            self.logger.exception("%s\nIRIS machine secrets not found. Ensure that IMS are present in: ~/.secrets.", exc)
+            self.logger.exception("%s\nIRIS machine secrets not found.\
+                Ensure that IMS are present in: ~/.secrets.", exc)
             return
         except FileExistsError:
             self.logger.info(

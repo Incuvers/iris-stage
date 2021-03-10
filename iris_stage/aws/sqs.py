@@ -22,7 +22,8 @@ class SQSClient:
         try:
             self.sqs = boto3.client('sqs')
         except botocore.exceptions.NoCredentialsError as exc:
-            self.logger.exception("%s\nAWS credentials not found. Ensure that ~/.aws/config and ~/.aws/credentials exist.", exc)
+            self.logger.exception("%s\nAWS credentials not found.\
+                Ensure that ~/.aws/config and ~/.aws/credentials exist.", exc)
             raise FileNotFoundError from exc
         # Latch on available SQS queue
         response = self.sqs.list_queues()

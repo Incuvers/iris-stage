@@ -26,7 +26,8 @@ class S3Client:
         try:
             self.s3 = boto3.client("s3")
         except botocore.exceptions.NoCredentialsError as exc:
-            self.logger.exception("%s\nAWS credentials not found. Ensure that ~/.aws/config and ~/.aws/credentials exist.", exc)
+            self.logger.exception("%s\nAWS credentials not found.\
+                Ensure that ~/.aws/config and ~/.aws/credentials exist.", exc)
             raise FileNotFoundError from exc
         self.logger.info("%s instantiated successfully.", __name__)
     
