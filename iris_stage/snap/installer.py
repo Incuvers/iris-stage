@@ -31,6 +31,9 @@ class Installer:
         self.logger.info("Installing newest snap")
         try:
             shutil.copytree(self.secrets, self.common)
+        except FileNotFoundError as exc:
+            self.logger.exception("%s\nIRIS machine secrets not found. Ensure that IMS are present in: ~/.secrets.", exc)
+            return
         except FileExistsError:
             self.logger.info(
                 "Machine secrets already exist in the correct location.")
