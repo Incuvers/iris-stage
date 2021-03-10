@@ -31,12 +31,22 @@ class StageClient(Service):
         Service runner entry and polling loop.
         """
         # initialize clients
-        self.logger.info("Initializing AWS SQS client")
-        sqs_client = SQSClient()
-        self.logger.info("Initializing AWS S3 client")
-        s3_client = S3Client()
-        self.logger.info("Initializing snap installer")
+        try:
+            sqs_client = SQSClient()
+        except FileNotFoundError:
+            self.logger.exception("Failed to initialize sqs client. Exiting.")
+            self.stop()
+        else:
+            self.logger.info("Initialized AWS SQS client")
+        try:
+            s3_client = S3Client()
+        except FileNotFoundError:
+            self.logger.exception("Failed to initialize s3 client. Exiting.")
+            self.stop()
+        else:
+            self.logger.info("Initialized AWS S3 client")
         installer = Installer()
+
         self.logger.info("Starting sqs main event loop")
         while not self.got_sigterm():
             response = sqs_client.poll_sqs()
