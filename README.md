@@ -1,5 +1,5 @@
 # Iris Staging Client
-[![Lint](https://github.com/Incuvers/iris-staging/actions/workflows/lint.yaml/badge.svg)](https://github.com/Incuvers/iris-staging/actions/workflows/lint.yaml)
+[![PyPI version](https://badge.fury.io/py/iris-stage.svg)](https://pypi.org/project/iris-stage/) [![Lint](https://github.com/Incuvers/iris-staging/actions/workflows/lint.yaml/badge.svg)](https://github.com/Incuvers/iris-staging/actions/workflows/lint.yaml)
 
 ![img](/docs/img/Incuvers-black.png)
 
