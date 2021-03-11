@@ -23,6 +23,9 @@ Halt the client:
 unstage
 ```
 
+## Iris Stage Client Deployment
+The recommended deployment method for the iris staging client is hosted on the [Incuvers/automation](https://github.com/Incuvers/automation) repository using ansible. Follow the setup instructions and proceed with the iris staging client deployment.
+
 ## Client Requirements
 This client is designed to be run on an iris production machine. All the hardware and peripherals should be mounted and ready for integration testing.
 
