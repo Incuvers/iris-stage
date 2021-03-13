@@ -8,6 +8,7 @@ Modified: 2021-02
 Handles new snap installations from s3 download location
 """
 import os
+import time
 import shutil
 import logging.config
 
@@ -39,6 +40,8 @@ class Installer:
             self.logger.info(
                 "Machine secrets already exist in the correct location.")
         os.system(f"snap install {self.tmp} --devmode")
+        # sleep for two minutes to let snap initialize fully before rebooting
+        time.sleep(120)
         # send dbus command to reboot system ( this is to circumvent pygame
         # freezes when the snap is removed )
         os.system(
