@@ -27,6 +27,7 @@ class Installer:
         secrets to $SNAP_COMMON and install new snap file in devmode.
         """
         self.logger.info("Removing current snap")
+        os.system(f"snap stop {self.name}")
         os.system(f"snap remove {self.name}")
         self.logger.info("Installing newest snap")
         try:
