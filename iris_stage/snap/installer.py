@@ -8,7 +8,6 @@ Modified: 2021-02
 Handles new snap installations from s3 download location
 """
 import os
-import time
 import shutil
 import logging.config
 
