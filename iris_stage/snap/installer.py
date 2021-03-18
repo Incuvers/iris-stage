@@ -40,12 +40,3 @@ class Installer:
             self.logger.info(
                 "Machine secrets already exist in the correct location.")
         os.system(f"snap install {self.tmp} --devmode")
-        # sleep for two minutes to let snap initialize fully before rebooting
-        time.sleep(120)
-        # send dbus command to reboot system ( this is to circumvent pygame
-        # freezes when the snap is removed )
-        os.system(
-            'dbus-send --system --print-reply --dest=org.freedesktop.login1 \
-            /org/freedesktop/login1 "org.freedesktop.login1.Manager.Reboot" \
-            boolean:true'
-        )
