@@ -1,5 +1,5 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-VERSION = (0, 1, 3)
+VERSION = (0, 1, 4)
 
 __version__ = '.'.join(map(str, VERSION))
