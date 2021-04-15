@@ -25,5 +25,5 @@ fi
 SERVICE=$1
 
 printf "%b" "${OKB}Uploading package distribution${NC}\n"
-twine upload -r "$SERVICE" dist/* --verbose
+python3 -m twine upload -r "$SERVICE" dist/* --verbose
 printf "%b" "${OKG} ✓ ${NC}complete\n"

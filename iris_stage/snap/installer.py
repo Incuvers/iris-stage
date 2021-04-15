@@ -8,7 +8,6 @@ Modified: 2021-02
 Handles new snap installations from s3 download location
 """
 import os
-import time
 import shutil
 import logging.config
 
@@ -28,6 +27,7 @@ class Installer:
         secrets to $SNAP_COMMON and install new snap file in devmode.
         """
         self.logger.info("Removing current snap")
+        os.system(f"snap stop {self.name}")
         os.system(f"snap remove {self.name}")
         self.logger.info("Installing newest snap")
         try:
@@ -40,12 +40,3 @@ class Installer:
             self.logger.info(
                 "Machine secrets already exist in the correct location.")
         os.system(f"snap install {self.tmp} --devmode")
-        # sleep for two minutes to let snap initialize fully before rebooting
-        time.sleep(120)
-        # send dbus command to reboot system ( this is to circumvent pygame
-        # freezes when the snap is removed )
-        os.system(
-            'dbus-send --system --print-reply --dest=org.freedesktop.login1 \
-            /org/freedesktop/login1 "org.freedesktop.login1.Manager.Reboot" \
-            boolean:true'
-        )
