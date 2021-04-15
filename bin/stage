@@ -6,7 +6,7 @@ export PID_DIR="/tmp"
 # aws client vars
 export SNAP_NAME="iris-incuvers"
 export S3_BUCKET='snapbuilds'
-export S3_OBJECT="$SNAP_NAME.snap"
+export S3_OBJECT="$SNAP_NAME-staging.snap"
 export SNAP_FP="/tmp/$S3_OBJECT"
 # snap secrets
 export SNAP_SECRETS="/home/ubuntu/.secrets"
