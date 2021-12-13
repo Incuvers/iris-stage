@@ -7,8 +7,8 @@ Modified: 2021-03
 
 
 """
-
-import logging.config
+import sys
+import logging
 import time
 
 from service import Service
@@ -36,6 +36,7 @@ class StageClient(Service):
         except FileNotFoundError:
             self.logger.exception("Failed to initialize sqs client. Exiting.")
             self.stop()
+            sys.exit(1)
         else:
             self.logger.info("Initialized AWS SQS client")
         try:
@@ -43,6 +44,7 @@ class StageClient(Service):
         except FileNotFoundError:
             self.logger.exception("Failed to initialize s3 client. Exiting.")
             self.stop()
+            sys.exit(1)
         else:
             self.logger.info("Initialized AWS S3 client")
         installer = Installer()

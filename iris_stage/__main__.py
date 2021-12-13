@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
-import logging.config
+import logging
 
-from iris_stage.service.service import StageClient
+from iris_stage.srv.srv import StageClient
 
 logger = logging.getLogger(__name__)
 SERVICE_NAME = os.environ['SERVICE_NAME']
