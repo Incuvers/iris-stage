@@ -7,10 +7,7 @@ import logging.config
 from pathlib import Path
 from iris_stage.srv.srv import StageClient
 
-# NOTE: config file should be in same relative directory as this script
-LOG_CONFIG_FILENAME = "config.yaml"
-CONFIG_PATH = Path(__file__).parent.joinpath(LOG_CONFIG_FILENAME)
-
+CONFIG_PATH = Path(__file__).parent.joinpath('logs/config.yaml')
 
 # bind logging to config file
 # verify path existance before initializing logger file configuration
