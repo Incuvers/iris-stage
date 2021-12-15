@@ -10,6 +10,7 @@ These certs will be stored in `/home/ubuntu/.secrets/` and artifically inserted 
 | -rw-r--r-- 1 ubuntu ubuntu  | cert_id.txt         |
 | -rw-r--r-- 1 ubuntu ubuntu  | certificate.pem.crt |
 | -rw-r--r-- 1 ubuntu ubuntu  | customer_id.txt     |
+| -rw-r--r-- 1 ubuntu ubuntu  | hardware.env        |
 | -rw-r--r-- 1 ubuntu ubuntu  | id.txt              |
 | -rw-r--r-- 1 ubuntu ubuntu  | private.pem.key     |
 | -rw-r--r-- 1 ubuntu ubuntu  | public.pem.key      |
