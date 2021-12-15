@@ -29,7 +29,6 @@ class Installer:
         self.logger.info("Removing current snap")
         os.system(f"snap stop {self.name}")
         os.system(f"snap remove {self.name}")
-        self.logger.info("Installing newest snap")
         try:
             shutil.copytree(self.secrets, self.common + '/certs')
         except FileNotFoundError as exc:
@@ -40,8 +39,9 @@ class Installer:
             self.logger.info(
                 "Machine secrets already exist in the correct location.")
         # special hardware dependant files dumped outside certs/
-        shutil.move(
-            self.common + '/certs/hardware.env',
-            self.common + '/hardware.env'
+        os.system(
+            f'mv {self.common}/certs/hardware.env {self.common}/hardware.env'
         )
+        self.logger.debug("hardware.env moved to %s successfully", self.common) 
         os.system(f"snap install {self.tmp} --devmode")
+        self.logger.info("snap installed successfully")
