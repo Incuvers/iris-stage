@@ -1,0 +1,46 @@
+---
+name: ci 
+on:
+  pull_request:
+    type: [opened, re-opened, synchronized]
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  lint:
+    name: lint suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+      - name: Set up Python (latest).
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - name: Install lint dependencies.
+        run: |
+          sudo apt update
+          sudo apt install -y make shellcheck
+          sudo -H python3 -m pip install yamllint flake8
+      - name: Run lint directive
+        run: flake8 iris_stage && yamllint . && shellcheck bin/*
+  pip:
+    name: python package install
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: install iris-stage
+        run: |
+          python3 -m pip install .
+          python3 -c 'import iris_stage; print(iris_stage.__version__)'
