@@ -40,5 +40,8 @@ class Installer:
             self.logger.info(
                 "Machine secrets already exist in the correct location.")
         # special hardware dependant files dumped outside certs/
-        shutil.move(self.common + '/certs/hardware.env', self.common + '/hardware.env')
+        shutil.move(
+            self.common + '/certs/hardware.env',
+            self.common + '/hardware.env'
+        )
         os.system(f"snap install {self.tmp} --devmode")
