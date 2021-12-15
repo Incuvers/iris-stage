@@ -10,6 +10,8 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
+      - name: check out the codebase.
+        uses: actions/checkout@v2
       - name: install dependancies
         run: python3 -m pip install twine
       - name: build package
