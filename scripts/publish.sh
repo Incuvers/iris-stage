@@ -1,29 +1,47 @@
 #!/bin/bash
 source .env
 
-# handle all non-zero exit status codes with a slack notification
-trap 'handler $? $LINENO' ERR
+SERVICE=""
+USERNAME=""
+PASSWORD=""
+REPO_URL=""
 
-handler () {
-    printf "%b" "${FAIL} ✗ ${NC} twine publish failed on line $2 with exit status $1\n"
-}
+while getopts ":hs:r:u:p:" opt; do
+    case "$opt" in
+        h )
+            echo "Usage:"
+            echo "      publish.sh -h                                                           Display this message"
+            echo "      publish.sh -s pypi -r "$REPOSITORY_URL" -p "$PASSWORD" -u $USERNAME     Publish dist to pypi"
+            exit 0;
+            ;;
+        s )
+            SERVICE="$OPTARG"
+            ;;
+        r )
+            REPO_URL="$OPTARG"
+            ;;
+        p )
+            PASSWORD="$OPTARG"
+            ;;
+        u )
+            USERNAME="$OPTARG"
+            ;;
+        \? )
+            echo "Invalid option: $OPTARG" 1>&2
+            exit 1;
+            ;;
+        : )
+            echo "Invalid option: $OPTARG requires an argument" 1>&2
+            exit 1;
+            ;;
+    esac
+done
 
-usage() {
-  cat <<EOF
-Usage:  ./publish.sh testpypi OR
-        ./publish.sh pypi
-Publish package to testpypi or pypi service
-EOF
-}
-
-if [ "$#" -ne 1 ]; then
-    printf "%b" "${FAIL}Missing required arguments${NC}\n"
-    printf "%b" "$(usage)\n"
+if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ] || [ -z "$REPO_URL" ] || [ -z "$SERVICE" ]; then
+    printf "%b" "${FAIL}Missing arguments${NC}\n"
     exit 1
 fi
 
-SERVICE=$1
-
 printf "%b" "${OKB}Uploading package distribution${NC}\n"
-python3 -m twine upload -r "$SERVICE" dist/* --verbose
+python3 -m twine upload -r "$SERVICE" -u "$USERNAME" -p "$PASSWORD" --repository-url "$REPO_URL" dist/* --verbose
 printf "%b" "${OKG} ✓ ${NC}complete\n"

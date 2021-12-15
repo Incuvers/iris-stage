@@ -9,7 +9,7 @@ Handles new snap installations from s3 download location
 """
 import os
 import shutil
-import logging.config
+import logging
 
 class Installer:
 
@@ -31,7 +31,7 @@ class Installer:
         os.system(f"snap remove {self.name}")
         self.logger.info("Installing newest snap")
         try:
-            shutil.copytree(self.secrets, self.common)
+            shutil.copytree(self.secrets, self.common + '/certs')
         except FileNotFoundError as exc:
             self.logger.exception("%s\nIRIS machine secrets not found.\
                 Ensure that IMS are present in: ~/.secrets.", exc)
@@ -39,4 +39,9 @@ class Installer:
         except FileExistsError:
             self.logger.info(
                 "Machine secrets already exist in the correct location.")
+        # special hardware dependant files dumped outside certs/
+        shutil.move(
+            self.common + '/certs/hardware.env',
+            self.common + '/hardware.env'
+        )
         os.system(f"snap install {self.tmp} --devmode")

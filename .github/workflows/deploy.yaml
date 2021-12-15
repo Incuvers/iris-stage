@@ -1,0 +1,19 @@
+---
+# build snap on new release
+name: deploy
+on:
+  release:
+    types: [published]
+
+jobs:
+  pypi:
+    name: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: install dependancies
+        run: python3 -m pip install twine
+      - name: build package
+        run: ./scripts/build.sh -r ${{ github.ref }}
+      - name: publish package
+        run: ./scripts/publish.sh -s pypi -r ${{ secrets.TWINE_URL }} -u \
+             ${{ secrets.TWINE_USERNAME }} -p ${{ secrets.TWINE_PASSWORD }}

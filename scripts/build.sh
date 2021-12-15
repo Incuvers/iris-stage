@@ -2,19 +2,39 @@
 
 source .env
 
-# handle all non-zero exit status codes with a slack notification
-trap 'handler $? $LINENO' ERR
+VERSION=""
 
-handler () {
-    printf "%b" "${FAIL} ✗ ${NC} dist build failed on line $2 with exit status $1\n"
-}
+while getopts ":hr:" opt; do
+    case "$opt" in
+        h )
+            echo "Usage:"
+            echo "      build.sh -h                         Display this message"
+            echo "      build.sh -r {{ github.ref }}        Build dist from github publish ref"
+            exit 0;
+            ;;
+        r )
+            VERSION=$(echo "$OPTARG" | awk -F '/' '{print $3}' | cut -c2-)
+            ;;
+        \? )
+            echo "Invalid option: $OPTARG" 1>&2
+            exit 1;
+            ;;
+        : )
+            echo "Invalid option: $OPTARG requires an argument" 1>&2
+            exit 1;
+            ;;
+    esac
+done
 
-# clean old distributions
-printf "%b" "${OKB}Cleaning previous distributions${NC}\n"
-rm -f dist/*
-printf "%b" "${OKG} ✓ ${NC}complete\n"
+shift $((OPTIND -1))
+
+if [ -z "$VERSION" ]; then
+        echo 'Missing github publish ref' >&2
+        exit 1
+fi
+
 
 # build package
-printf "%b" "${OKB}Building package distribution${NC}\n"
+printf "%b" "${OKB}Building package distribution for version: $VERSION${NC}\n"
 python setup.py sdist bdist_wheel
 printf "%b" "${OKG} ✓ ${NC}complete\n"
