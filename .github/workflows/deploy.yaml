@@ -1,6 +1,6 @@
 ---
 # build snap on new release
-name: deploy 
+name: deploy
 on:
   release:
     types: [published]
@@ -15,4 +15,5 @@ jobs:
       - name: build package
         run: ./scripts/build.sh -r ${{ github.ref }}
       - name: publish package
-        run: ./scripts/publish.sh -s pypi -r ${{ secrets.TWINE_URL }} -u ${{ secrets.TWINE_USERNAME }} -p ${{ secrets.TWINE_PASSWORD }}
+        run: ./scripts/publish.sh -s pypi -r ${{ secrets.TWINE_URL }} -u \
+             ${{ secrets.TWINE_USERNAME }} -p ${{ secrets.TWINE_PASSWORD }}
